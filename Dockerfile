@@ -24,3 +24,8 @@ COPY requirements/langchain.txt requirements/langchain.txt
 
 RUN --mount=type=cache,target=/root/.cache \
     pip install -r requirements/langchain.txt
+
+COPY requirements/additional.txt requirements/additional.txt
+
+RUN --mount=type=cache,target=/root/.cache \
+    pip install -r requirements/additional.txt
