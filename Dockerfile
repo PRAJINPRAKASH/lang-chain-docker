@@ -3,19 +3,24 @@ FROM python:3.10-slim
 WORKDIR /python-docker
 
 RUN apt-get update &&\
-    apt-get install --no-install-recommends --yes build-essential
-RUN apt-get install -y git libmagic-dev \
+    apt-get install --no-install-recommends --yes build-essential\
+     git libmagic-dev \
      poppler-utils libreoffice pandoc \
      tesseract-ocr libxml2 libxslt-dev
 
 ENV PYTHONUNBUFFERED 1
 
-COPY requirements.txt .
+COPY requirements/unstructured.txt requirements/unstructured.txt
 
 RUN --mount=type=cache,target=/root/.cache \
-    pip install -r requirements.txt
+    pip install -r requirements/unstructured.txt
 
-COPY requirements2.txt .
+COPY requirements/unstructured.txt requirements/detectron2.txt
 
 RUN --mount=type=cache,target=/root/.cache \
-    pip install -r requirements2.txt
+    pip install -r requirements/detectron2.txt
+
+COPY requirements/langchain.txt requirements/langchain.txt
+
+RUN --mount=type=cache,target=/root/.cache \
+    pip install -r requirements/langchain.txt
