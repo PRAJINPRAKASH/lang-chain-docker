@@ -15,7 +15,7 @@ COPY requirements/unstructured.txt requirements/unstructured.txt
 RUN --mount=type=cache,target=/root/.cache \
     pip install -r requirements/unstructured.txt
 
-COPY requirements/unstructured.txt requirements/detectron2.txt
+COPY requirements/detectron2.txt requirements/detectron2.txt
 
 RUN --mount=type=cache,target=/root/.cache \
     pip install -r requirements/detectron2.txt
